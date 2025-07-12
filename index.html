@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KD Tracker</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
 
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      color: #d9c8b1;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 18px;
+    }
+
+    .stats {
+      background-color: rgba(15, 15, 15, 0.7);
+      padding: 10px 15px;
+      border-left: 3px solid #7a5c44;
+      display: inline-block;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="stats" id="stats">
+    🔪 Kills: 0<br>
+    💀 Deaths: 0<br>
+    ⚖️ KD: 0.00
+  </div>
+
+  <script>
+    let kills = 0;
+    let deaths = 0;
+
+    function updateStats() {
+      const kd = deaths === 0 ? kills : (kills / deaths).toFixed(2);
+      document.getElementById('stats').innerHTML = `
+        🔪 Kills: ${kills}<br>
+        💀 Deaths: ${deaths}<br>
+        ⚖️ KD: ${kd}
+      `;
+    }
+
+    function addKill() {
+      kills++;
+      updateStats();
+    }
+
+    function addDeath() {
+      deaths++;
+      updateStats();
+    }
+
+    function reset() {
+      kills = 0;
+      deaths = 0;
+      updateStats();
+    }
+
+    // Auto update on load
+    updateStats();
+  </script>
+</body>
+</html>
